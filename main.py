@@ -1,6 +1,24 @@
 import accountting
 import store
+import Invoice
 
+def Input_Invoice():
+    result = Invoice.Invoice()
+
+    result.v_bs_name = input("Buyer/Seller Name : ")
+    result.v_dt = input("Date : ")
+    result.v_no = input("NO : ")
+    print("######## Invoice details ##########")
+    loop = 'y'
+    while loop=='y':
+        description  = input("Description : ")
+        amount = int(input("Amount : "))
+        num = int(input("Number : "))
+        result.AddDetail(description,amount,num)
+        loop = input("Do you have an other detail (press y to Add an other detail) ? ")
+    
+    result.v_discount = int(input("Discount : "))
+    return result
 #Init Variables
 acc = accountting.Accounting()
 st = store.Store()
@@ -69,6 +87,10 @@ while True:
     elif ch=='7' : # Invoce Print all
         pass
     elif ch=='8' : # Invoce increase
-        pass
+        inv = Input_Invoice()
+        inv.Print()
+        ch = input("Press y to save data : ")
+        if ch == 'y' :
+            inv.SaveAll()
     elif ch=='9' : # Invoce decrease
         pass
